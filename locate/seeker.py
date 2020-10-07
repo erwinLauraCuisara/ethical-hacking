@@ -363,7 +363,8 @@ def Quit():
 	global result
 	with open (result, 'w+'): pass
 	os.system('pkill php')
-	os.system("bash runNgrok.sh stop")
+	os.system('pkill ngrok')
+	#os.system("bash runNgrok.sh stop")
 
 
 
@@ -378,6 +379,6 @@ try:
 	wait()
 	main()
 
-except KeyboardInterrupt:
+except:
 	print ('\n' + R + '[!]' + C + ' Keyboard Interrupt.' + W)
 	Quit()

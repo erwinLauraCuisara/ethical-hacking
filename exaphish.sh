@@ -17,6 +17,9 @@ brnd=`shuf -i 2-7 -n 1`
 banner="a$brnd"
 s="m"
 bcolor="\e[1;3$crnd$s"
+
+
+
 #Banners
 dev(){
 echo -e "\e[1;39m				  by\e[1;39m > Virtual Tecno Dynamic"
@@ -118,6 +121,7 @@ command -v git > /dev/null 2>&1 || { echo >&2 -e "$v[*]$b Installing git..."; pk
 }
 
 stop() {
+
 checkng=$(ps aux | grep -o "ngrok" | head -n1)
 checkphp=$(ps aux | grep -o "php" | head -n1)
 if [[ $checkng == *'ngrok'* ]]; then
@@ -1586,4 +1590,5 @@ sed -i '2i '"$ogrede"'' login.php
 fi
 add_option
 }
+
 options
