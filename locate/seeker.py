@@ -110,7 +110,7 @@ def template_select():
 	
 	try:
 		site = templ_json['templates'][selected]['dir_name']
-		os.system("./runNgrok.sh")
+		os.system("bash runNgrok.sh ngrok")
 
 	except IndexError:
 		print('\n' + R + '[-]' + C + ' Invalid Input!' + W + '\n')
@@ -363,6 +363,10 @@ def Quit():
 	global result
 	with open (result, 'w+'): pass
 	os.system('pkill php')
+	os.system("bash runNgrok.sh stop")
+
+
+
 	exit()
 
 try:

@@ -1,5 +1,5 @@
 
-
+#!/bin/bash
 
 link="localhost:8080"
 v="\e[1;91m"
@@ -15,8 +15,6 @@ sleep 2
 #findngrok
 ./ngrok http $link > /dev/null &
 echo -e "$v[$b*$v]$b Verifica una buena conexión de internet"
-sleep 5
-echo -e "$v[$b*$v]$b Abriendo servidor PHP..."
 sleep 7
 echo -e "$v[$b*$v]$b Abriendo ngrok..."
 sleep 7
@@ -79,4 +77,12 @@ fi
 fi
 
 }
-ngrok
+stop() {
+checkng=$(ps aux | grep -o "ngrok" | head -n1)
+if [[ $checkng == *'ngrok'* ]]; then
+pkill -f -2 ngrok > /dev/null &
+killall -f ngrok > /dev/null &
+fi
+}
+
+"$@"
